@@ -215,5 +215,11 @@ abstract class CommandOptions
           return $this;
       }
 
+      public function colorize($number)
+      {
+          $this->command .= ' -colorize '.$number;
+          return $this;
+      }
+
 
 }
