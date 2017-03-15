@@ -111,7 +111,7 @@ final class References
     public function color($color)
     {
         $color = trim($color);
-        return _validateColor($color);
+        return self::_validateColor($color);
     }
 
     /**
@@ -212,7 +212,7 @@ final class References
      public function fill($color)
      {
         $color = trim($color);
-        return _validateColor($color);
+        return self::_validateColor($color);
      }
 
      private function _validateColor($color)
