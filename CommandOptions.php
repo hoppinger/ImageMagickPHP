@@ -211,7 +211,7 @@ abstract class CommandOptions
       */
       public function fill($color)
       {
-          $this->command .= ' -fill '.$this-ref->fill($color);
+          $this->command .= ' -fill '.$this->ref->fill($color);
           return $this;
       }
 
