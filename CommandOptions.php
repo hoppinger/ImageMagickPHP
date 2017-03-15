@@ -184,4 +184,23 @@ abstract class CommandOptions
         return $this;
     }
 
+    /**
+     * @param string $method
+     *
+     * return $this
+     */
+     public function compose($method)
+     {
+         $this->command .= '-compose'.$this->ref->compose($method);
+     }
+
+     /**
+      *
+      * @return $this
+      */
+      public function composite()
+      {
+          $this->command .= '-composite'
+      }
+
 }

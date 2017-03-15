@@ -76,6 +76,14 @@ final class References
     }
 
     /**
+     * #@return string[]
+     */
+     public function getComposeMethodReference()
+     {
+         return $this->config['compose_methods'];
+     }
+
+    /**
      * Checks that a geometry option is correct according to ImageMagick Geometry reference.
      * @link http://www.imagemagick.org/script/command-line-processing.php#geometry
      *
@@ -199,4 +207,27 @@ final class References
             'http://www.imagemagick.org/script/command-line-options.php#interlace'
         ));
     }
+
+    /**
+     * Checks that the compose method is valid in the references.
+     *
+     * @params string $composeMethod
+     *
+     * @return string
+     */
+     public function compose($composeMethod)
+     {
+        $composeMethod = strtolower(trim($composeMethod));
+        $references = $this->getComposeMethodReference();
+        if(in_array($composeMethod, $references, true)) {
+            return $composeMethod;
+        }
+        throw new \InvalidArgumentException(sprintf(
+            'The specified compose method (%s) is invalid.'."\n".
+            'The available values are:'."\n%s\n".
+            'Please refer to ImageMagick command line documentation:'."\n%s",
+            $composeMethod, implode(',', $refereces),
+            'http://www.imagemagick.org/script/command-line-options.php#compose'
+        ));
+     }
 }
