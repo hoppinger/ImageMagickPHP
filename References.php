@@ -111,29 +111,7 @@ final class References
     public function color($color)
     {
         $color = trim($color);
-        if (
-            // Check "hex"
-            preg_match('~^#(?:[a-f0-9]{3}|[a-f0-9]{6}|[a-f0-9]{12})$~i', $color)
-
-            // Check "hexa"
-            || preg_match('~^#([a-f0-9]{8}|[a-f0-9]{16})$~i', $color)
-            || preg_match('~^rgb\(\d{1,3}(\.\d{1,2})?%?, ?\d{1,3}(\.\d{1,2})?%?, ?\d{1,3}(\.\d{1,2})?%?\)$~', $color)
-
-            // Check "rgb"
-            || preg_match('~^rgba\(\d{1,3}(\.\d{1,2})?%?, ?\d{1,3}(\.\d{1,2})?%?, ?\d{1,3}(\.\d{1,2})?%?, ?[01](\.\d{1,6})?\)$~', $color)
-
-            // Check "rgba"
-            || in_array($color, $this->getColorsReference(), true)// And check the dirty one : all the color names supported by ImageMagick
-        ) {
-            return $color;
-        }
-
-        throw new \InvalidArgumentException(sprintf(
-            'The specified color (%s) is invalid.'."\n".
-            'Please refer to ImageMagick command line documentation about colors:'."\n%s",
-            $color,
-            'http://www.imagemagick.org/script/color.php'
-        ));
+        return _validateColor($color);
     }
 
     /**
@@ -228,6 +206,39 @@ final class References
             'Please refer to ImageMagick command line documentation:'."\n%s",
             $composeMethod, implode(',', $refereces),
             'http://www.imagemagick.org/script/command-line-options.php#compose'
+        ));
+     }
+
+     public function fill($color)
+     {
+        $color = trim($color);
+        return _validateColor($color);
+     }
+
+     private function _validateColor($color)
+     {
+        if (
+            // Check "hex"
+            preg_match('~^#(?:[a-f0-9]{3}|[a-f0-9]{6}|[a-f0-9]{12})$~i', $color)
+
+            // Check "hexa"
+            || preg_match('~^#([a-f0-9]{8}|[a-f0-9]{16})$~i', $color)
+            || preg_match('~^rgb\(\d{1,3}(\.\d{1,2})?%?, ?\d{1,3}(\.\d{1,2})?%?, ?\d{1,3}(\.\d{1,2})?%?\)$~', $color)
+
+            // Check "rgb"
+            || preg_match('~^rgba\(\d{1,3}(\.\d{1,2})?%?, ?\d{1,3}(\.\d{1,2})?%?, ?\d{1,3}(\.\d{1,2})?%?, ?[01](\.\d{1,6})?\)$~', $color)
+
+            // Check "rgba"
+            || in_array($color, $this->getColorsReference(), true)// And check the dirty one : all the color names supported by ImageMagick
+        ) {
+            return $color;
+        }
+
+        throw new \InvalidArgumentException(sprintf(
+            'The specified color (%s) is invalid.'."\n".
+            'Please refer to ImageMagick command line documentation about colors:'."\n%s",
+            $color,
+            'http://www.imagemagick.org/script/color.php'
         ));
      }
 }

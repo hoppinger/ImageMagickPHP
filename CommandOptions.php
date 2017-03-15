@@ -191,7 +191,7 @@ abstract class CommandOptions
      */
      public function compose($method)
      {
-         $this->command .= '-compose'.$this->ref->compose($method);
+         $this->command .= ' -compose '.$this->ref->compose($method);
          return $this;
      }
 
@@ -201,8 +201,19 @@ abstract class CommandOptions
       */
       public function composite()
       {
-          $this->command .= '-composite';
-         return $this;
+          $this->command .= ' -composite ';
+          return $this;
       }
+
+     /**
+      *
+      * @return $this
+      */
+      public function fill($color)
+      {
+          $this->command .= ' -fill '.$this-ref->fill($color);
+          return $this;
+      }
+
 
 }
