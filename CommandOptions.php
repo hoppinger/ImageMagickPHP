@@ -200,7 +200,7 @@ abstract class CommandOptions
       */
       public function composite()
       {
-          $this->command .= '-composite'
+          $this->command .= '-composite';
       }
 
 }
