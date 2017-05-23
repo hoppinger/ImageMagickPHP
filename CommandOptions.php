@@ -222,4 +222,12 @@ abstract class CommandOptions
       }
 
 
+      public function colorspace($colorspace)
+      {
+          $this->command .= ' -colorspace '.$colorspace;
+          return $this;
+      }
+
+
+
 }
