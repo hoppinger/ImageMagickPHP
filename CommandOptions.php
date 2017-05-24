@@ -222,4 +222,14 @@ abstract class CommandOptions
       }
 
 
+      public function colorspace($colorspace, $linear = true)
+      {
+          if (!$linear) {
+            $this->command .= ' -set colorspace RGB';
+          }
+
+          $this->command .= ' -colorspace '.$colorspace;
+          return $this;
+      }
+
 }
